@@ -23,6 +23,9 @@ public class ResourceStorage : MonoBehaviour
     public MeshCollider factoryMeshComponent;
     public Click factoryClickComponent;
 
+    [Header("Time Stuff")]
+    public bool gameIsPaused = true;
+
     private void Start()
     {
         Click.Clicked += (sender, msg) => saw(1);
@@ -34,8 +37,11 @@ public class ResourceStorage : MonoBehaviour
 
     private void saw(int efficiency)
     {
-        log -= efficiency;
-        plank += efficiency;
+        if (!gameIsPaused)
+        {
+            log -= efficiency;
+            plank += efficiency;
+        }
         //TODO: Create option where sawing two logs makes two planks and it's called here
     }
 
@@ -48,6 +54,12 @@ public class ResourceStorage : MonoBehaviour
     public void buyPlanks(int quantity, int price) //Assumes user already has money
     {
         plank += quantity;
+        money -= price;
+    }
+
+    public void buyLogs(int quantity, int price) //Assumes user already has money
+    {
+        log += quantity;
         money -= price;
     }
 

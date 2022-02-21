@@ -30,7 +30,7 @@ public class BuyButton : MonoBehaviour
             quantity = Random.Range(quantityMin, quantityMax);
         }
         gameObject.GetComponentInChildren<TMP_Text>().text = gameObject.GetComponentInChildren<TMP_Text>().text.Replace("#", quantity.ToString());
-        gameObject.GetComponentInChildren<TMP_Text>().text = gameObject.GetComponentInChildren<TMP_Text>().text.Replace("$", price.ToString());
+        gameObject.GetComponentInChildren<TMP_Text>().text = gameObject.GetComponentInChildren<TMP_Text>().text.Replace("$", "$" + price.ToString());
         gameObject.GetComponentInChildren<TMP_Text>().text = gameObject.GetComponentInChildren<TMP_Text>().text.Replace("\n", " %"); //I give up, code no work
         gameObject.GetComponentInChildren<TMP_Text>().text = gameObject.GetComponentInChildren<TMP_Text>().text.Replace("%", " \n");
         gameObject.GetComponent<Button>().onClick.AddListener(Click); //Roundabout but cleaRLY i don't know buttons as well as I thought I did
@@ -39,9 +39,9 @@ public class BuyButton : MonoBehaviour
 
     private void Click()
     {
-        if (GameObject.Find("$Storage").GetComponent<ResourceStorage>().plank > quantity)
+        if (GameObject.Find("$Storage").GetComponent<ResourceStorage>().money >= price)
         {
-            GameObject.Find("$Storage").GetComponent<ResourceStorage>().sellPlanks(quantity, price);
+            GameObject.Find("$Storage").GetComponent<ResourceStorage>().buyLogs(quantity, price);
         }
     }
 
