@@ -22,6 +22,7 @@ public class ResourceStorage : MonoBehaviour
 
     public MeshCollider factoryMeshComponent;
     public Click factoryClickComponent;
+    public AudioSource factoryAudio;
 
     [Header("Time Stuff")]
     public bool gameIsPaused = true;
@@ -37,11 +38,9 @@ public class ResourceStorage : MonoBehaviour
 
     private void saw(int efficiency)
     {
-        if (!gameIsPaused)
-        {
-            log -= efficiency;
-            plank += efficiency;
-        }
+        log -= efficiency;
+        plank += efficiency;
+
         //TODO: Create option where sawing two logs makes two planks and it's called here
     }
 
@@ -70,11 +69,11 @@ public class ResourceStorage : MonoBehaviour
         logText.text = log.ToString();
         plankText.text = plank.ToString();
 
-        if (log > 0)
+        if (log > 0 && factoryAudio.enabled)
         {
             factoryMeshComponent.enabled = true;
         }
-        else
+        else if (factoryAudio.enabled)
         {
             //actoryMeshComponent.ena
             factoryMeshComponent.enabled = false;

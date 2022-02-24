@@ -17,6 +17,7 @@ public class Click : MonoBehaviour
     private void Start()
     {
         _renderer = gameObject.GetComponent<Renderer>();
+        startcolor = _renderer.material.color;
     }
 
     // Start is called before the first frame update
@@ -25,7 +26,7 @@ public class Click : MonoBehaviour
     private void OnMouseEnter()
     {
         exitTrue = false;
-        startcolor = _renderer.material.color;
+
         _renderer.material.color = Color.yellow;
     }
 
@@ -45,6 +46,7 @@ public class Click : MonoBehaviour
 
     private void OnMouseExit()
     {
+        // print("mouseExited");
         exitTrue = true;
         _renderer.material.color = startcolor;
     }
